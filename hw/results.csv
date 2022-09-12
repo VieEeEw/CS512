@@ -1,0 +1,79 @@
+Lassi
+Cheese
+Coffee Powder
+Yougurt
+Ghee
+Butter
+Tea Powder
+Panner
+Bread
+Sugar
+Sweet
+Milk
+Cheese,Lassi
+Coffee Powder,Lassi
+Lassi,Yougurt
+Ghee,Lassi
+Butter,Lassi
+Cheese,Coffee Powder
+Cheese,Yougurt
+Cheese,Ghee
+Butter,Cheese
+Coffee Powder,Yougurt
+Coffee Powder,Ghee
+Butter,Coffee Powder
+Ghee,Yougurt
+Butter,Yougurt
+Butter,Ghee
+Lassi,Tea Powder
+Cheese,Tea Powder
+Butter,Tea Powder
+Cheese,Panner
+Bread,Cheese
+Coffee Powder,Tea Powder
+Coffee Powder,Panner
+Bread,Coffee Powder
+Butter,Panner
+Bread,Butter
+Panner,Tea Powder
+Bread,Tea Powder
+Bread,Panner
+Cheese,Sugar
+Cheese,Sweet
+Coffee Powder,Sugar
+Coffee Powder,Sweet
+Sugar,Yougurt
+Sweet,Yougurt
+Butter,Sugar
+Butter,Sweet
+Sugar,Sweet
+Ghee,Tea Powder
+Ghee,Panner
+Ghee,Sugar
+Ghee,Sweet
+Ghee,Milk
+Sugar,Tea Powder
+Sweet,Tea Powder
+Milk,Tea Powder
+Panner,Sugar
+Panner,Sweet
+Milk,Panner
+Milk,Sugar
+Milk,Sweet
+Tea Powder,Yougurt
+Bread,Sweet
+Bread,Milk
+Lassi,Panner
+Lassi,Sugar
+Lassi,Milk
+Coffee Powder,Milk
+Panner,Yougurt
+Milk,Yougurt
+Butter,Milk
+Lassi,Sweet
+Bread,Lassi
+Bread,Ghee
+Bread,Sugar
+Cheese,Milk
+Bread,Yougurt
+Lassi,Panner,Sweet

@@ -1,0 +1,6 @@
+__pycach__/
+.idea/
+.vscode/
+*.csv
+*.zip
+*.tar.gz
