@@ -11,7 +11,7 @@ def read_csv(fname: str) -> List[Set[str]]:
 
 
 class Apriori:
-    def __init__(self, min_sup: int = MIN_SUP, output: str = "results.csv", debug=False):
+    def __init__(self, min_sup: int = MIN_SUP, output: str = "results.txt", debug=False):
         self.tx = read_csv(CSV_FILE_DEBUG if debug else CSV_FILE)
         self.k = 1
         self.o = open(output, "w")
@@ -57,5 +57,5 @@ class Apriori:
 
 
 if __name__ == "__main__":
-    apriori = Apriori(debug=True, min_sup=2)
+    apriori = Apriori()
     apriori.mine()
