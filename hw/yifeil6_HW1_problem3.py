@@ -7,7 +7,7 @@ CSV_FILE_DEBUG = "purchase_history_debug.csv"
 
 def read_csv(fname: str) -> List[Set[str]]:
     with open(fname, "r") as f:
-        return [{k for k in line.strip().split(",")} for line in f]
+        return [{k.strip() for k in line.strip().split(",")} for line in f]
 
 
 class Apriori:
@@ -15,7 +15,7 @@ class Apriori:
         self.tx = read_csv(CSV_FILE_DEBUG if debug else CSV_FILE)
         self.k = 1
         self.o = open(output, "w")
-        self.min_sup = 5 if debug else min_sup
+        self.min_sup = min_sup
         temp: Dict[str, int] = {}
         for row in self.tx:
             for word in row:
@@ -57,5 +57,5 @@ class Apriori:
 
 
 if __name__ == "__main__":
-    apriori = Apriori()
+    apriori = Apriori(debug=True, min_sup=2)
     apriori.mine()

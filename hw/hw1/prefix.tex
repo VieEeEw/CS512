@@ -1,0 +1,26 @@
+
+\documentclass[12pt]{article}%
+
+\providecommand{\UsePackage}[2][]{%
+   \IfFileExists{../../../styles/#2.sty}%
+   {\usepackage[#1]{../../../styles/#2}}%
+   {\IfFileExists{../../styles/#2.sty}%
+         {\usepackage[#1]{../../styles/#2}}%
+         {\IfFileExists{../styles/#2.sty}%
+                       {\usepackage[#1]{../styles/#2}}%
+                       {\IfFileExists{styles/#2.sty}%
+                          {\usepackage[#1]{styles/#2}}
+                          {\usepackage[#1]{#2}}%
+                       } % 
+         }%
+   }
+}
+
+
+\UsePackage{374} %
+\UsePackage{374_extra} %
+\UsePackage{solutions}%
+%\begin{document}
+
+
+
