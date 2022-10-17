@@ -4,14 +4,15 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from typing import List, Tuple
 import os
+from glob import glob
 
 CAR_CSV = "car_data.csv"
-DIR = "HW1_source"
 VALIDATION_RATIO = 0.8
+MAX_ITER = 500
 
 
-def parse_csv() -> Tuple[np.ndarray, np.ndarray, int, int]:
-    with open(os.path.join(DIR, CAR_CSV), 'r') as f:
+def parse_csv(path: str) -> Tuple[np.ndarray, np.ndarray, int, int]:
+    with open(path, 'r') as f:
         f.readline()
         age_max = 0
         salary_max = 0
@@ -51,21 +52,29 @@ def eval_model(model, val_ds, test_ds):
 
 
 def report_with_norm(val_ds: Tuple[np.ndarray, np.ndarray], test_ds: Tuple[np.ndarray, np.ndarray], norm=True):
-    max_iter = -1 if norm else 500
+    max_iter = -1 if norm else MAX_ITER
     linear = SVC(kernel="linear", max_iter=max_iter)
-    logistic = LogisticRegression(solver="liblinear", max_iter=500)
+    logistic = LogisticRegression(solver="liblinear", max_iter=MAX_ITER)
     kernel = SVC(gamma=1, max_iter=max_iter)
+    print("Linear SVM", end=' ')
     eval_model(linear, val_ds, test_ds)
+    print("Logistic", end=' ')
     eval_model(logistic, val_ds, test_ds)
+    print("RBF Kernel SVM", end=' ')
     eval_model(kernel, val_ds, test_ds)
 
 
 if __name__ == "__main__":
-    f, label, f1_max, f2_max = parse_csv()
+    file = glob(CAR_CSV) + glob(f"*/{CAR_CSV}")
+    if not file:
+        print(f"File {CAR_CSV} is not found.")
+        exit(0)
+    f, label, f1_max, f2_max = parse_csv(file[0])
     val, test = split(f, label)
     f_norm = normalize(f, f1_max, f2_max)
     val_norm, test_norm = split(f_norm, label)
-    print("Normed")
+    print("Accuracy Report:")
+    print("---------- Normed ----------")
     report_with_norm(val_norm, test_norm)
-    print("Not normed")
+    print("---------- Not normed ----------")
     report_with_norm(val, test, norm=False)

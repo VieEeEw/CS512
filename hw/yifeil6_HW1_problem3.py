@@ -1,4 +1,5 @@
 from typing import List, Dict, Set
+from glob import glob
 
 MIN_SUP = 1264
 CSV_FILE = "purchase_history.csv"
@@ -11,8 +12,8 @@ def read_csv(fname: str) -> List[Set[str]]:
 
 
 class Apriori:
-    def __init__(self, min_sup: int = MIN_SUP, output: str = "results.txt", debug=False):
-        self.tx = read_csv(CSV_FILE_DEBUG if debug else CSV_FILE)
+    def __init__(self, path: str, min_sup: int = MIN_SUP, output: str = "results.txt", debug=False):
+        self.tx = read_csv(CSV_FILE_DEBUG if debug else path)
         self.k = 1
         self.o = open(output, "w")
         self.min_sup = min_sup
@@ -25,6 +26,7 @@ class Apriori:
             if count >= min_sup:
                 self.item_set.append({item})
                 self.o.write(f"{item}\n")
+        print(f"Results written to {output}")
 
     def mine(self):
         while len(self.item_set) > 0:
@@ -57,5 +59,9 @@ class Apriori:
 
 
 if __name__ == "__main__":
-    apriori = Apriori()
+    file = glob(CSV_FILE) + glob(f"*/{CSV_FILE}")
+    if not file:
+        print(f"Data not found {CSV_FILE}.")
+        exit(0)
+    apriori = Apriori(file[0])
     apriori.mine()
