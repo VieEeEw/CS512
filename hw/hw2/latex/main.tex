@@ -1,0 +1,60 @@
+\def\solutionMode{TRUE}%
+
+\documentclass[11pt]{article}%
+\usepackage{solutions}%
+\usepackage{374}%
+\usepackage{374_extra}% 
+
+\begin{document}
+
+\noindent\textbf{\LARGE H{}W Solution}\\
+\noindent{\textbf{\Course: \CourseName, \Semester}}
+\hfill\Version{1.0}%
+\\[-0.12cm]
+%
+\Hr%
+\smallskip%
+
+\noindent%
+Submitted by:
+\begin{compactitem}
+    \item \textbf{$\l$Yifei Liu}:
+    \textbf{yifeil6}
+\end{compactitem}
+\Hr
+\medskip
+\SaveIndent%
+
+\begin{questions}[start=1]
+    \item \SolutionMP{%
+
+        Holer
+    }
+\end{questions}
+\pagebreak
+\begin{questions}[start=2]
+    \item \SolutionMP{%
+        \begin{questions}
+            \item Numerator is the number of samples $o'$ "near" the sample $o$, denominator is
+            the number of samples in $D$, thus LHS is the ratio of samples from $D$ that is close
+            to $o$.
+
+            Therefore this ratio is less than $\pi\ \Leftrightarrow$ few samples from $D$
+            is close to $o\ \Leftrightarrow\ o$ is a distance-based outlier.
+            \item \begin{align*}
+                 & \frac{\|o'|dist(o,o')\leq r\|}{\|D\|} \leq \pi                  \\
+                 & \Leftrightarrow \|o'|dist(o,o')\leq r\| \leq \|D\| \pi          \\
+                 & \Leftrightarrow \|o'|dist(o,o')\leq r\| < \lceil\pi\|D\| \rceil \\
+                 & \Leftrightarrow \|o'|dist(o,o')> r\| > \lceil\pi\|D\| \rceil    \\
+                 & \Leftrightarrow \|o'|dist(o,o')> r\| > k
+            \end{align*}
+            Therefore if $dist(o, o_k)>r\forall o_k$, then $\|o'|dist(o,o')> r\| > k$, thus $o$ is an outlier.
+            $\blacksquare$
+        \end{questions}
+    }
+\end{questions}
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

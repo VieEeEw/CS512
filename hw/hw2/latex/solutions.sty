@@ -1,0 +1,115 @@
+% Put the following line the top of the file, if you want the
+% solutions to appear:
+%         \def\solutionMode{TRUE}
+
+\usepackage{color}%
+%\usepackage{mcolors}%
+\usepackage{framed}%
+\usepackage{chngpage} 
+%
+
+\definecolor{shadecolor}{rgb}{1.0,1.0,0.95}%
+\providecommand{\SolVer}[1]{}%
+\providecommand{\NotSolVer}[1]{#1}%
+\providecommand{\FullVer}[1]{#1}%
+
+\newlength{\savedparindentxx}
+\providecommand{\SaveIndent}{}%
+\renewcommand{\SaveIndent}{\setlength{\savedparindentxx}{\parindent}}
+
+\providecommand{\RestoreIndent}{}%
+\renewcommand{\RestoreIndent}{\setlength{\parindent}{\savedparindentxx}}
+
+
+
+\makeatletter
+\def\provideenvironment{\@star@or@long\provide@environment}
+\def\provide@environment#1{%
+        \@ifundefined{#1}%
+                {\def\reserved@a{\newenvironment{#1}}}%
+                {\def\reserved@a{\renewenvironment{dummy@environ}}}%
+        \reserved@a
+}
+\def\dummy@environ{}
+\makeatother
+
+\provideenvironment{solution}{}{}
+
+\ifx\solutionMode\undefined
+  \usepackage{environ}
+
+  \providecommand{\FullVer}[1]{#1}%
+  \RenewEnviron{solution}{}{}%
+  \NewEnviron{SOLUTION}{}{}%
+  \renewcommand{\FullVer}[2]{}%
+\else%
+  \renewcommand{\SolVer}[1]{#1}%
+  \renewcommand{\NotSolVer}[1]{}%
+  \provideenvironment{SOLUTION}{}{}%
+  \renewenvironment{SOLUTION}{%
+%      \begin{shaded}%
+      \noindent
+      \begin{leftbar}%
+          \noindent%
+          \hspace*{-0.5cm}%
+          {\textbf{\Large{\underline{Solution}:}}}
+          
+%          \vspace{-0.6cm}
+          \RestoreIndent  %
+       }%
+       {
+          \end{leftbar}
+          \medskip%
+       }
+       
+
+   \renewenvironment{solution}{%
+          \noindent\begin{minipage}{0.99\linewidth}
+              \begin{leftbar}%
+                  \RestoreIndent  %
+                  \noindent
+                  \textbf{Solution: }
+               }%
+               {%
+              \end{leftbar}
+          \end{minipage}
+       }
+       
+\fi
+       
+\providecommand{\Solution}[1]{}
+\providecommand{\SolutionSmall}[1]{}%
+\providecommand{\SolutionMP}[1]{}%
+\providecommand{\SolutionExt}[2]{}%
+
+
+\renewcommand{\SolutionSmall}[1]{%
+   \begin{solution}
+       #1
+   \end{solution}%
+}%
+\renewcommand{\SolutionMP}[1]{%
+   \begin{SOLUTION}
+       #1
+   \end{SOLUTION}%
+}%
+\renewcommand{\Solution}[1]{%
+   \begin{SOLUTION}
+       #1
+   \end{SOLUTION}%
+}%
+   
+\renewcommand{\SolutionExt}[2]{%
+   \SolVer{%
+      \bigskip
+   
+      \noindent\textbf{\Large{#1}}\\
+   }
+   \begin{SOLUTION}
+       #2
+   \end{SOLUTION}%
+}
+       
+   
+
+
