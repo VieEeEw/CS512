@@ -5,3 +5,12 @@ __pycach__/
 *.zip
 *.tar.gz
 venv/
+
+
+*.log
+*.fls
+*.gz
+*.thm
+*.aux
+*latexmk
+*.out
