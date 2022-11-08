@@ -6,6 +6,7 @@ __pycach__/
 *.tar.gz
 venv/
 
+data/
 
 *.log
 *.fls

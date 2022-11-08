@@ -50,7 +50,100 @@ Submitted by:
             \end{align*}
             Therefore if $dist(o, o_k)>r\forall o_k$, then $\|o'|dist(o,o')> r\| > k$, thus $o$ is an outlier.
             $\blacksquare$
+            \item Denote $f(o)=\frac{\|o'|dist(o,o')\leq r\|}{\|D\|}$, then\\
+            $f(-4.5)=0.3> \pi$, -4.5 is not an outlier.\\
+            $f(-4)=0.3> \pi$, -4 is not an outlier.\\
+            $f(-3)=0.3> \pi$, -3 is not an outlier.\\
+            $f(-2.5)=0.3> \pi$, -2.5 is not an outlier.\\
+            $f(3)=0.4> \pi$, 3 is not an outlier.\\
+            $f(3.5)=0.4> \pi$, 3.5 is not an outlier.\\
+            $f(4)=0.4> \pi$, 4 is not an outlier.\\
+            $f(4.5)=0.4> \pi$, 4.5 is not an outlier.\\
+            $f(5)=0.4> \pi$, 5 is not an outlier.\\
+
+            $f(0)=0.0\leq \pi$, 0 is an outlier.\\
         \end{questions}
+    }
+\end{questions}
+\pagebreak
+\begin{questions}[start=3]
+    \item \SolutionMP{%
+
+        Holer
+    }
+\end{questions}
+\pagebreak
+\begin{questions}[start=4]
+    \item \SolutionMP{%
+        \begin{questions}
+            \item a: local maximal; b: saddle point; c: cliff; d: local minimal
+            \item We have $\frac{\partial O}{\partial I}=O(1-O)$
+            \begin{questions}
+                \item
+                \begin{align*}
+                    \delta_k & =\frac{\partial L_k}{\partial I_k}         \\
+                             & =-(T-O_k)\frac{\partial O_k}{\partial I_k} \\
+                             & =O_k(1-O_k)(O_k-T)\blacksquare
+                \end{align*}
+                \item \begin{align*}
+                    \delta_i & = \frac{\partial L_i}{\partial I_i}                            \\
+                             & = \frac{\partial (\frac{1}{m}\sum_j^mw_{ij}L_j)}{\partial I_i} \\
+                             & =\frac{\partial O_i}{\partial I_i}\sum_j^mw_{ij}\delta_j       \\
+                             & =O_k(1-O_k)\sum_j^mw_{ij}\delta_j\blacksquare
+                \end{align*}
+                \item \begin{align*}
+                    delta_k' & =\frac{\partial L_k'}{\partial I_k}                          \\
+                             & =\frac{\partial (-T\log O_k-(1-T)\log(1-O_k))}{\partial I_k} \\
+                             & =\frac{\partial O_k}{\partial I_k}\frac{T-O_k}{O_k(1-O_k)}   \\
+                             & =O_k(1-O_k)\frac{T-O_k}{O_k(1-O_k)}=T-O_k\blacksquare
+                \end{align*}
+                \item When output unit is saturated, we have MSE = $O_k(1-O_k)(O_k-T)\approx 0$ as well,
+                where as for Cross-Entropy loss does not have this issue.
+            \end{questions}
+        \end{questions}
+    }
+\end{questions}
+\pagebreak
+\begin{questions}[start=5]
+    \item \SolutionMP{%
+        \begin{questions}
+            \item Conv with $K_1$: [[0, 2, 1, 0], [1, 1, 0, 2], [2, 0, 2, 1], [1, 2, 0, 1]].
+
+            Conv with $K_2$: [[2, 1, 2, 2], [2, 1, 1, 2], [1, 2, 1, 3], [2, 1, 1, 2]].
+            \item Avg Pooling on feature map with $K_1$: [[1.0, 0.75], [1.25, 1.0]].
+
+            Avg Pooling on feature map with $K_2$: [[1.5, 1.75], [1.5, 1.75]].
+            \item The output shape is $E\times E\times D$, where $E=\lfloor \frac{N-K}{S}\rfloor + 1$.
+            \item $h_1=Wh_0+Ux_1=[2, 2]$, $h2=Wh_1+Ux_2=[5,3]$, $\hat{y_2}=Vh_2=[8,5]$
+        \end{questions}
+    }
+\end{questions}
+\pagebreak
+\begin{questions}[start=6]
+    \item \SolutionMP{%
+
+        Holer
+    }
+\end{questions}
+\pagebreak
+\begin{questions}[start=7]
+    \item \SolutionMP{%
+
+        Holer
+    }
+\end{questions}
+\pagebreak
+\begin{questions}[start=8]
+    \item \SolutionMP{%
+
+        Holer
+    }
+\end{questions}
+\pagebreak
+\begin{questions}[start=9]
+    \item \SolutionMP{%
+
+        Holer
     }
 \end{questions}
 \end{document}
