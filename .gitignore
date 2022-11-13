@@ -7,6 +7,7 @@ __pycach__/
 venv/
 
 data/
+*.pth
 
 *.log
 *.fls
