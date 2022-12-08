@@ -27,8 +27,25 @@ Submitted by:
 
 \begin{questions}[start=1]
     \item \SolutionMP{%
+        1. True. If we use reconstruction model for outlier detection.
 
-        Holer
+        2. True. Distances between any two vertices are of one length in a fully connected graph.
+
+        3. Data samples that are far away from each other are outliers, the samples that are close
+        to each other are less likely to be outliers.
+
+        4. Sparse interactions / Parameter sharing / Translational equivalent / less computational expensive.
+
+        5. Translational equivalent means the model can produce the same output no matter where the input is placed,
+        and it is achieved by parameter sharing (convolution).
+
+        Translational invariance means the model can produce the same output when the input is translated
+        and it is achieved by pooling operation.
+
+        6. Dropout layer can be seen as a regularization on the model itself to
+        force the model to be more robust to noise, and to learn more generalizable features.
+
+        7.
     }
 \end{questions}
 \pagebreak
@@ -68,10 +85,34 @@ Submitted by:
 \pagebreak
 \begin{questions}[start=3]
     \item \SolutionMP{%
+        \begin{questions}
+            \item Distance-based approach defines the outlier samples with the property that there are not
+            enough neighbouring data samples around. Density-based approach defines the outlier samples with
+            the property that the data sample density is significant lower than its neighbours.
+            \item $lrd_k(o)=\mathlarger{\frac{\|N_k(o)\|}{\sum_{o'\in N_k(o)}reachdist_k(o'\leftarrow o)}}$
+            \begin{questions}
+                \item We have $\mathlarger{\frac{\sum_{o'\in N_k(o)}reachdist_k(o'\leftarrow o)}{\|N_k(o)\|}
+                        =\frac{\sum_{o'\in N_k(o)}\max\{dist_k(o'),dist(o',o)\}}{k}}$\\\\
+                Which is the average reachability distance from $o$ to $o'\in N_k(o)$.
+                \item Intuitively, when the density of $o$ is small, in other words, if $o \notin dist_k(o')$,
+                then $reachdist_k(o',o)$ will be larger and
+                the average reachability distance from $o$ to $o'\in N_k(o)$ will increase and $lrd_k(o)$
+                will decrease. Therefore, if the sample $o$ is closer to a cluster, which can be interpreted
+                as $o\in dist_k(o')$ for most $o'\in dist_k(o)$, then $lrd_k(o)$ will increase.
+            \end{questions}
+            \item $LOF_k(o)=\mathlarger{\mathlarger{\frac{\sum_{o'\in N_k(o)}\frac{lrd_k(o')}{lrd_k(o)}}{\|N_k(o)\|}}}$\\\\
+            By calculating the division, we can compare the density of $o$ and $o'$, $LOF_k(o)$ is then defined as
+            the average density ratio of the density of $o$'s k nearest neighbours and the density of $o$.
 
-        Holer
+            $MY_LOF_k$
+        \end{questions}
     }
 \end{questions}
+% \begin{align*}
+%     & \hspace{1.3em} \frac{\|N_k(o)\|}{\sum_{o'\in N_k(o)}reachdist_k(o'\leftarrow o)} \\
+%     & =\frac{k}{\sum_{o'\in N_k(o)}\max\{dist_k(o'),dist(o',o)\}}\\
+%     &=
+% \end{align*}
 \pagebreak
 \begin{questions}[start=4]
     \item \SolutionMP{%
@@ -92,10 +133,10 @@ Submitted by:
                              & =O_k(1-O_k)\sum_j^mw_{ij}\delta_j\blacksquare
                 \end{align*}
                 \item \begin{align*}
-                    delta_k' & =\frac{\partial L_k'}{\partial I_k}                          \\
-                             & =\frac{\partial (-T\log O_k-(1-T)\log(1-O_k))}{\partial I_k} \\
-                             & =\frac{\partial O_k}{\partial I_k}\frac{T-O_k}{O_k(1-O_k)}   \\
-                             & =O_k(1-O_k)\frac{T-O_k}{O_k(1-O_k)}=T-O_k\blacksquare
+                    \delta_k' & =\frac{\partial L_k'}{\partial I_k}                          \\
+                              & =\frac{\partial (-T\log O_k-(1-T)\log(1-O_k))}{\partial I_k} \\
+                              & =\frac{\partial O_k}{\partial I_k}\frac{T-O_k}{O_k(1-O_k)}   \\
+                              & =O_k(1-O_k)\frac{T-O_k}{O_k(1-O_k)}=T-O_k\blacksquare
                 \end{align*}
                 \item When output unit is saturated, we have MSE = $O_k(1-O_k)(O_k-T)\approx 0$ as well,
                 where as for Cross-Entropy loss does not have this issue.
@@ -109,12 +150,13 @@ Submitted by:
         \begin{questions}
             \item Conv with $K_1$: [[0, 2, 1, 0], [1, 1, 0, 2], [2, 0, 2, 1], [1, 2, 0, 1]].
 
-            Conv with $K_2$: [[2, 1, 2, 2], [2, 1, 1, 2], [1, 2, 1, 3], [2, 1, 1, 2]].
+            Conv with $K_2$: [[2, 1, 1, 2], [1, 2, 1, 2], [1, 2, 1, 2], [3, 1, 1, 1]].
             \item Avg Pooling on feature map with $K_1$: [[1.0, 0.75], [1.25, 1.0]].
 
             Avg Pooling on feature map with $K_2$: [[1.5, 1.75], [1.5, 1.75]].
-            \item The output shape is $E\times E\times D$, where $E=\lfloor \frac{N-K}{S}\rfloor + 1$.
+            \item The output shape is $E\times E\times L$, where $E=\lfloor \frac{N-K}{S}\rfloor + 1$.
             \item $h_1=Wh_0+Ux_1=[2, 2]$, $h2=Wh_1+Ux_2=[5,3]$, $\hat{y_2}=Vh_2=[8,5]$
+            \item Message passing tree for Node $a$. \\\includegraphics[scale=0.5]{figs/hw2-5-d.png}
         \end{questions}
     }
 \end{questions}
@@ -128,8 +170,7 @@ Submitted by:
 \pagebreak
 \begin{questions}[start=7]
     \item \SolutionMP{%
-
-        Holer
+        \includegraphics[scale=0.6]{figs/hw2-7-c.png}
     }
 \end{questions}
 \pagebreak
@@ -142,8 +183,14 @@ Submitted by:
 \pagebreak
 \begin{questions}[start=9]
     \item \SolutionMP{%
-
-        Holer
+        \begin{questions}
+            \item $1-(1-\beta)^n$
+            \item 38.6013
+            \item Treating infected probability $\geq0.6$ as infected, geting an epidemic.\\
+            \includegraphics[scale=0.7]{figs/hw2-9-c.png}
+            \item Treating infected probability $\geq0.6$ as infected, getting no epidemic.\\
+            \includegraphics[scale=0.7]{figs/hw2-9-d.png}
+        \end{questions}
     }
 \end{questions}
 \end{document}

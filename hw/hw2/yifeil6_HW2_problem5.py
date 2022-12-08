@@ -3,7 +3,7 @@ import scipy.signal as ss
 
 
 def conv2d_stride(arr: np.ndarray, kernel: np.ndarray, stride: int = 1, mode: str = "valid") -> np.ndarray:
-    return ss.convolve2d(arr, kernel[::-1, ::-1], mode=mode)[::stride, ::stride]
+    return ss.correlate2d(arr, kernel, mode=mode)[::stride, ::stride]
 
 
 if __name__ == "__main__":
@@ -11,8 +11,8 @@ if __name__ == "__main__":
     k1 = np.array([0, 1, 1, 0]).reshape(2, 2)
     k2 = np.array([1, 0, 1, 1]).reshape(2, 2)
     avg_pool = np.array([0.25, 0.25, 0.25, 0.25]).reshape(2, 2)  # avg pooling
-    a1 = ss.convolve2d(mat, k1, mode="valid")
-    a2 = ss.convolve2d(mat, k2, mode="valid")
+    a1 = conv2d_stride(mat, k1, mode="valid")
+    a2 = conv2d_stride(mat, k2, mode="valid")
     # 2-5 a
     print(a1.tolist())
     print(a2.tolist())
