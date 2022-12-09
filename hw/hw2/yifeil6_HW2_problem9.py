@@ -19,17 +19,16 @@ class SISModel:
         self.delta: float = delta
         self.sys_mat = (1 - self.delta) * np.identity(self.num_nodes) + self.beta * self.adj
 
-    def _step(self):
+    def _step(self) -> int:
         self.iteration += 1
         self.state = self.sys_mat @ self.state
         self.state[self.state > 1] = 1
+        return sum(self.state >= self.threshold)
 
     def _run(self, steps: int) -> list:
         ret = []
         for _ in range(steps):
-            self._step()
-            mask = self.state >= self.threshold
-            infected = np.sum(mask)
+            infected = self._step()
             ret.append(infected)
         return ret
 

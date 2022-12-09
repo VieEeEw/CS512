@@ -28,23 +28,23 @@ Submitted by:
 \begin{questions}[start=1]
     \item \SolutionMP{%
         1. True. If we use reconstruction model for outlier detection.
-
+        
         2. True. Distances between any two vertices are of one length in a fully connected graph.
-
+        
         3. Data samples that are far away from each other are outliers, the samples that are close
         to each other are less likely to be outliers.
-
+        
         4. Sparse interactions / Parameter sharing / Translational equivalent / less computational expensive.
-
+        
         5. Translational equivalent means the model can produce the same output no matter where the input is placed,
         and it is achieved by parameter sharing (convolution).
-
+        
         Translational invariance means the model can produce the same output when the input is translated
         and it is achieved by pooling operation.
-
+        
         6. Dropout layer can be seen as a regularization on the model itself to
         force the model to be more robust to noise, and to learn more generalizable features.
-
+        
         7. {$A: 0,\ B: \frac{1}{3},\ C: \frac{1}{3},\ D: \frac{2}{3},\ E: \frac{4}{15}
                     ,\ F: 1,\ G: 1,\ H: \frac{2}{3},$} result: $\frac{8}{15}$
     }
@@ -56,7 +56,7 @@ Submitted by:
             \item Numerator is the number of samples $o'$ "near" the sample $o$, denominator is
             the number of samples in $D$, thus LHS is the ratio of samples from $D$ that is close
             to $o$.
-
+            
             Therefore this ratio is less than $\pi\ \Leftrightarrow$ few samples from $D$
             is close to $o\ \Leftrightarrow\ o$ is a distance-based outlier.
             \item \begin{align*}
@@ -78,7 +78,7 @@ Submitted by:
             $f(4)=0.4> \pi$, 4 is not an outlier.\\
             $f(4.5)=0.4> \pi$, 4.5 is not an outlier.\\
             $f(5)=0.4> \pi$, 5 is not an outlier.\\
-
+            
             $f(0)=0.0\leq \pi$, 0 is an outlier.\\
         \end{questions}
     }
@@ -104,10 +104,10 @@ Submitted by:
             \item $LOF_k(o)=\mathlarger{\mathlarger{\frac{\sum_{o'\in N_k(o)}\frac{lrd_k(o')}{lrd_k(o)}}{\|N_k(o)\|}}}$\\\\
             By calculating the division, we can compare the density of $o$ and $o'$, $LOF_k(o)$ is then defined as
             the average density ratio of the density of $o$'s k nearest neighbours and the density of $o$.
-
+            
             $MY\_LOF_k$ is not directly comparable. $MY\_LOF_k(o)$ will be inherently bigger than $MY\_LOF_k(o')$
             when $\|N_k(o)\| > \|N_k(o')\|$
-
+            
         \end{questions}
     }
 \end{questions}
@@ -152,10 +152,10 @@ Submitted by:
     \item \SolutionMP{%
         \begin{questions}
             \item Conv with $K_1$: [[0, 2, 1, 0], [1, 1, 0, 2], [2, 0, 2, 1], [1, 2, 0, 1]].
-
+            
             Conv with $K_2$: [[2, 1, 1, 2], [1, 2, 1, 2], [1, 2, 1, 2], [3, 1, 1, 1]].
             \item Avg Pooling on feature map with $K_1$: [[1.0, 0.75], [1.25, 1.0]].
-
+            
             Avg Pooling on feature map with $K_2$: [[1.5, 1.5], [1.75, 1.25]].
             \item The output shape is $E\times E\times L$, where $E=\lfloor \frac{N-K}{S}\rfloor + 1$.
             \item $h_1=Wh_0+Ux_1=[2, 2]$, $h2=Wh_1+Ux_2=[5,3]$, $\hat{y_2}=Vh_2=[8,5]$
@@ -186,7 +186,10 @@ Submitted by:
             do not share the same number of vertices.
             \item It is an approximation instead of a real computation of the eigen-drop, and it is computational
             cheaper. In addition, as shown in the paper, the eigen-drop is directly related to the proposed $'Shield-value'$.
-            \item
+            \item Suppose compute eigen vector cost O(1) time. Step 1 costs O(m), the first for-loop costs O(n),
+            the second nested for-loop costs O($nk^2$). Overall time comlexity O($nk^2+m$), where $m$ is the
+            number of edges and $n$ is the number of vertices.
+            
         \end{questions}
     }
 \end{questions}
