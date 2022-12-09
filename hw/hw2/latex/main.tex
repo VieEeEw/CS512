@@ -188,8 +188,13 @@ Submitted by:
             cheaper. In addition, as shown in the paper, the eigen-drop is directly related to the proposed $'Shield-value'$.
             \item Suppose compute eigen vector cost O(1) time. Step 1 costs O(m), the first for-loop costs O(n),
             the second nested for-loop costs O($nk^2$). Overall time comlexity O($nk^2+m$), where $m$ is the
-            number of edges and $n$ is the number of vertices.
+            number of edges and $n$ is the number of vertices. Space is O($m+n+k$), O($m+n$) to store the graph
+            and O($k$) to store the selected vertices.
+            \item $NetShield+$ instead of computing all $k$ vertices, introduces a batch number $b$ and finds the
+            $k$ vertices to delete iteratively.
             
+            $NetShield+$ addresses the issue that $NetShield$ might not satisfy the constraints of \textbf{Lemma 1}
+            on small graphs.
         \end{questions}
     }
 \end{questions}
