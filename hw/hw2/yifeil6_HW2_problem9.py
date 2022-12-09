@@ -4,14 +4,15 @@ from glob import glob
 import os
 import networkx as nx
 
+from functools import lru_cache
+import random
+
 DATA_NAME = "social_network.txt"
-THRESHOLD = 0.4
 
 
 class SISModel:
-    def __init__(self, adj: np.ndarray, threshold: float = THRESHOLD, beta: float = 0.01, delta: float = 0.05):
+    def __init__(self, adj: np.ndarray, beta: float = 0.01, delta: float = 0.05):
         self.iteration: int = 0
-        self.threshold: float = threshold
         self.adj: np.ndarray = adj
         self.num_nodes: int = adj.shape[0]
         self.state: np.ndarray = np.ones(self.num_nodes)
@@ -19,11 +20,18 @@ class SISModel:
         self.delta: float = delta
         self.sys_mat = (1 - self.delta) * np.identity(self.num_nodes) + self.beta * self.adj
 
+    @lru_cache(None)
+    def prob(self, n: int) -> float:
+        return 1 - (1 - self.beta) ** n
+
     def _step(self) -> int:
         self.iteration += 1
-        self.state = self.sys_mat @ self.state
-        self.state[self.state > 1] = 1
-        return sum(self.state >= self.threshold)
+        self.state = np.array(
+            [self.state[i] or self.prob(self.state @ self.adj[i, :]) >= random.random() for i in range(self.num_nodes)])
+        for i in range(self.num_nodes):
+            if self.state[i]:
+                self.state[i] = random.random() > self.delta
+        return sum(self.state)
 
     def _run(self, steps: int) -> list:
         ret = []
@@ -55,8 +63,9 @@ if __name__ == "__main__":
     G = nx.read_edgelist(file[0], delimiter=",")
     largest_cc = max(nx.connected_components(G), key=len)
 
+    random.seed(114514)
     adj_matrix = nx.to_numpy_array(G.subgraph(largest_cc))
     sis = SISModel(adj_matrix)
-    sis.present(500, "c", 100)
+    sis.present(300, "c", 100, save=True)
     sis = SISModel(adj_matrix, delta=0.4)
-    sis.present(10, "d", 0)
+    sis.present(30, "d", 0, save=True)
