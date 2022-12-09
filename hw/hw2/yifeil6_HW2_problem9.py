@@ -18,7 +18,6 @@ class SISModel:
         self.state: np.ndarray = np.ones(self.num_nodes)
         self.beta: float = beta
         self.delta: float = delta
-        self.sys_mat = (1 - self.delta) * np.identity(self.num_nodes) + self.beta * self.adj
 
     @lru_cache(None)
     def prob(self, n: int) -> float:
