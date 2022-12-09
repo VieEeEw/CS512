@@ -45,7 +45,8 @@ Submitted by:
         6. Dropout layer can be seen as a regularization on the model itself to
         force the model to be more robust to noise, and to learn more generalizable features.
 
-        7.
+        7. {$A: 0,\ B: \frac{1}{3},\ C: \frac{1}{3},\ D: \frac{2}{3},\ E: \frac{4}{15}
+                    ,\ F: 1,\ G: 1,\ H: \frac{2}{3},$} result: $\frac{8}{15}$
     }
 \end{questions}
 \pagebreak
@@ -104,7 +105,9 @@ Submitted by:
             By calculating the division, we can compare the density of $o$ and $o'$, $LOF_k(o)$ is then defined as
             the average density ratio of the density of $o$'s k nearest neighbours and the density of $o$.
 
-            $MY_LOF_k$
+            $MY\_LOF_k$ is not directly comparable. $MY\_LOF_k(o)$ will be inherently bigger than $MY\_LOF_k(o')$
+            when $\|N_k(o)\| > \|N_k(o')\|$
+
         \end{questions}
     }
 \end{questions}
@@ -153,18 +156,11 @@ Submitted by:
             Conv with $K_2$: [[2, 1, 1, 2], [1, 2, 1, 2], [1, 2, 1, 2], [3, 1, 1, 1]].
             \item Avg Pooling on feature map with $K_1$: [[1.0, 0.75], [1.25, 1.0]].
 
-            Avg Pooling on feature map with $K_2$: [[1.5, 1.75], [1.5, 1.75]].
+            Avg Pooling on feature map with $K_2$: [[1.5, 1.5], [1.75, 1.25]].
             \item The output shape is $E\times E\times L$, where $E=\lfloor \frac{N-K}{S}\rfloor + 1$.
             \item $h_1=Wh_0+Ux_1=[2, 2]$, $h2=Wh_1+Ux_2=[5,3]$, $\hat{y_2}=Vh_2=[8,5]$
             \item Message passing tree for Node $a$. \\\includegraphics[scale=0.5]{figs/hw2-5-d.png}
         \end{questions}
-    }
-\end{questions}
-\pagebreak
-\begin{questions}[start=6]
-    \item \SolutionMP{%
-
-        Holer
     }
 \end{questions}
 \pagebreak
@@ -176,8 +172,22 @@ Submitted by:
 \pagebreak
 \begin{questions}[start=8]
     \item \SolutionMP{%
-
-        Holer
+        \begin{questions}
+            \item The first eigenvalue of the adjacent matrix of \textbf{G} holds the following two properties at the same time:
+            \begin{questions}
+                \item According to the SIS epidemic model, there exists a strong relationship between
+                the \\"epidemic threshold $\tau$" and the first eigenvalue of the adjacent matrix.
+                \item The first eigenvalue is also a good measurement for the property of the graph \textbf{G} that
+                how many loops and paths \textbf{G} can hold, which also represents the connectivity of \textbf{G}. Since
+                the better connected a graph is then the more vulnerable the graph is, the first eigenvalue
+                of the adjacent matrix of \textbf{G} is also a good measurement of V(\textbf{G}).
+            \end{questions}
+            \item Cannot directly compare V($\textbf{G}_1$) and V($\textbf{G}_2$) when $\textbf{G}_1$ and $\textbf{G}_2$
+            do not share the same number of vertices.
+            \item It is an approximation instead of a real computation of the eigen-drop, and it is computational
+            cheaper. In addition, as shown in the paper, the eigen-drop is directly related to the proposed $'Shield-value'$.
+            \item
+        \end{questions}
     }
 \end{questions}
 \pagebreak
